@@ -132,7 +132,7 @@
     <value>VSDateTimeInserter</value>
   </data>
   <data name="112" xml:space="preserve">
-    <value>This is a VSPackage Extension containing a menu command that will insert the current date & time in the caret position inside the code editor
+    <value>This is a VSPackage Extension containing a menu command that will insert the current date and time in the caret position inside the code editor
 </value>
   </data>
   <data name="400" type="System.Resources.ResXFileRef, System.Windows.Forms">

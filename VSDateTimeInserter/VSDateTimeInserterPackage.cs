@@ -8,6 +8,7 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using EnvDTE;
 
 namespace WarNov.VSDateTimeInserter
 {
@@ -78,22 +79,10 @@ namespace WarNov.VSDateTimeInserter
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            // Show a Message Box to prove we were here
-            IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
-            Guid clsid = Guid.Empty;
-            int result;
-            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
-                       0,
-                       ref clsid,
-                       "VSDateTimeInserter",
-                       string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.ToString()),
-                       string.Empty,
-                       0,
-                       OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                       OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
-                       OLEMSGICON.OLEMSGICON_INFO,
-                       0,        // false
-                       out result));
+            DTE dte = GetService(typeof(DTE)) as DTE;
+            TextDocument objTextDoc = dte.ActiveDocument.Object("TextDocument") as TextDocument;
+            objTextDoc.Selection.Text =
+                String.Concat(DateTime.Now.ToShortDateString(), " - ", DateTime.Now.ToShortTimeString());
         }
 
     }
